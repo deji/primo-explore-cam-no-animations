@@ -11,6 +11,9 @@ app.controller('SkipToAfterController', [function () {
 
     function cancelAnimations(){
         console.log('cancelling app animations');
+
+        localStorage.setItem('cancelAnimationSet', true);
+
         var style = document.createElement('style');
         style.type = 'text/css';
         style.innerHTML = '* {' +
@@ -34,4 +37,10 @@ app.controller('SkipToAfterController', [function () {
         '   animation: none !important;}';
         document.getElementsByTagName('head')[0].appendChild(style);
     }
+
+    var isCancelAnimationSet = localStorage.getItem('cancelAnimationSet') || false;
+    if (isCancelAnimationSet) {
+        cancelAnimations();
+    }
+    
 }]);
